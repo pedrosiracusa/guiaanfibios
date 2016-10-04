@@ -1,0 +1,110 @@
+/*!
+ * Start Bootstrap - Portfolio Item HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+
+h1, h2, h3, h4, h5, h6{
+	text-transform: none;
+}
+
+body {
+    padding-top: 50px; /* Required padding for .navbar-fixed-top. Remove if using .navbar-static-top. Change if height of navigation changes. */
+}
+
+.portfolio-item {
+    margin-bottom: 25px;
+}
+
+
+section.content-section{padding-top:0px;}
+
+/** SPECIES GUIDE **/
+/* Species Detail */
+/*--------
+	IMAGE
+--------*/
+/* assign to a column div containing an image */
+div.img-fill{
+	padding:0;
+}
+div.side-text{
+	padding:0 1.2em;
+}
+
+/*------------
+	OCC MONTHS
+------------*/
+.occurrence-months-ruler{
+	padding:0;
+	margin-bottom: 1em;
+}
+.occurrence-months-ruler h5{
+	margin:0;
+	font-size: .9em;
+}
+.occurrence-months-ruler .icon span { font-size: .9em; margin-top:.2em;}
+.occurrence-months-ruler .months{ padding:0; }
+.occurrence-months-ruler .month-item { padding:.5em 0; }
+.occurrence-months-ruler .month-item:not(.selected){ background-color:#ccc; }
+.occurrence-months-ruler .month-item h5.sep-right { border-right: 1px solid white; }
+.occurrence-months-ruler #month-12 h5 { border-right:none; }
+.occurrence-months-ruler .month-item.selected{ }
+
+
+/*-----------------
+	Media Bar
+-----------------*/
+
+
+/*------------------------
+	Comparative Size image
+	and Distribution Map
+	Map also uses own stylesheet
+------------------------*/
+
+.compsize,
+.distmap{
+	line-height:0px;
+	margin-bottom:.4em;
+}
+.compsize h4,
+.distmap h4{
+	margin-bottom:.4em;
+}
+
+.compsize i#hand { color:#ccc; }
+object#distmap{
+	height:80px;
+}
+
+/*----------
+	SECTIONS
+----------*/
+/* Thematic family colors */
+.bg-color{ color:white;}
+
+/* bufonidae */
+.colortheme-bufonidae .bg-color{ background-color: #D99E33; }
+.colortheme-bufonidae .theme-color { color: #D99E33; }
+
+/* odontophrynidae */
+.colortheme-odontophrynidae .theme-color { color: #B02727; }
+.colortheme-odontophrynidae .bg-color{ background-color: #B02727; }
+
+/* dendrobatidae */
+.colortheme-dendrobatidae .theme-color { color: #F3D642; }
+.colortheme-dendrobatidae .bg-color { background-color:#F3D642; }
+
+/* hylidae */
+.colortheme-hylidae .bg-color{ background-color: #42A84A; }
+.colortheme-hylidae .theme-color { color: #42A84A; }
+
+/* leptodactylidae */
+.colortheme-leptodactylidae .bg-color{ background-color: #4FA4A0; }
+.colortheme-leptodactylidae .theme-color { color: #4FA4A0; }
+
+
+
+

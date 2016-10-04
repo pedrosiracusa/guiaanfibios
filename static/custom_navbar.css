@@ -1,0 +1,48 @@
+/*--------
+	NAVBAR
+--------*/
+
+
+
+nav.navbar.navbar-fixed-top .navbar-header{
+	opacity:1;
+	height:50px;
+	transition:opacity .6s, height .6s;
+}
+nav.navbar.navbar-fixed-top:not(.top-nav-collapse) .navbar-header{
+	height:0;
+	opacity:0;
+}
+
+
+@media(max-width:991px){
+
+	nav.navbar.navbar-fixed-top .navbar-header{
+		width:100%;
+	}
+	nav.navbar.navbar-fixed-top .navbar-header a.navbar-brand{
+		text-align:center;
+		width:100%;
+	}
+	
+	nav.navbar.navbar-fixed-top .navbar-right{
+		width:100%;
+	}
+	nav.navbar.navbar-fixed-top .navbar-right ul.navbar-nav{
+		margin: 0 auto;
+		display: table;
+		table-layout: fixed;
+		float:none;
+	}
+}
+
+
+nav.navbar-fixed-top.top-nav-collapse .navbar-header a span{
+	font-weight:100;
+
+}
+
+
+div#map{
+	margin-top:0;
+}

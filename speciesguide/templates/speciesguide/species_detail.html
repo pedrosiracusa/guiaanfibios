@@ -1,0 +1,191 @@
+{% extends "speciesguide/base.html" %}
+
+{% block color-theme %}colortheme-{{species_detail.family.slug}}{% endblock %}
+
+{% block subnav %}
+	<div id="subnav" class="container-fluid subnav {{species_detail.family.slug}} bg-color">
+		<div class="container">
+			<div class="col-xs-12">
+				<h3>Família <strong>{{species_detail.family}}</strong></h3>
+			</div>
+		</div>
+	</div>
+{% endblock %}
+
+
+{% block content %}
+
+<!-- Species Profile -->
+<section id="spc-profile" class="content content-section text-center">
+    <div class="container-fluid">
+        <div class="row">
+        
+        	<!-- Profile Image -->
+            <div class="col-md-6 img-fill">
+                <img class="img-responsive" src="{{ species_detail.thumb }}" alt="">
+                <div class="occurrence-months-ruler col-xs-12 text-center bg-color">
+            		<div class="col-xs-1 icon">
+            			<span class="fa-stack fa-lg">
+            				<i class="fa fa-circle fa-stack-2x"></i>
+            				<i class="fa fa-calendar fa-stack-1x theme-color"></i>
+            			</span>
+            		</div>
+            		<div class="col-xs-11 months">
+            		{% for mon in months %}
+        			<div id="month-{{mon.number}}" class="month-item col-xs-1 {% if mon in species_detail.occurrence_months.all %}selected{% endif %}">
+        				<h5>{{mon.abbr_name}}</h5>
+        			</div>
+            		{% endfor %}
+            		</div>
+                </div>	
+                
+                
+            </div>
+            
+            <!-- Player
+            <div class="media col-xs-2">
+            		<audio id="player">
+                			<source src="/media/sp_archive/SOUN/proceratophrys_goyana/proceratophrys_song1.mp3" type="audio/mpeg">
+                	</audio>
+                	<div class="col-xs-12">
+                		<div id="audio-controls">
+                			<span class="fa-stack fa-sm">
+                				<i class="fa fa-circle fa-stack-2x"></i>
+                				<i id="playpause" class="fa fa-play fa-stack-1x theme-color"></i>
+                			</span>
+                		</div>
+                	</div>
+            </div>
+            -->
+
+			<!-- Side Text -->
+            <div class="col-md-6">
+            	<div class="col-xs-12 side-text">
+			        <!-- Item Header -->
+	                <h1 class="page-header text-right"><em>{{species_detail.name}}</em><br/>
+	                    <small>{{species_detail.vernacular}}</small>
+	                </h1>
+            		<p class="text-justify">{{species_detail.description}}</p>
+				</div>
+
+        		<div class="compsize col-xs-6">
+        			<h4>Tamanho <small>{{species_detail.size}}cm</small></h4><br/>
+	            	<i id="hand" class="sg-hand" style="font-size:{{handcompsize}}px"></i>
+	            	<i id="species" class="sg-{{species_detail.family.slug}} theme-color" style="font-size:{{speciescompsize}}px"></i>
+            	</div>
+            	<div class="distmap col-xs-6">
+					<h4>Distribuição <small>Brasil</small></h4>
+					<object id="distmap" type="image/svg+xml" data="/media/distmap/brazil_basemap_simp.svg"></object>
+            	</div>	          
+            </div>
+            
+        </div>
+</section>
+
+<!-- Articles Section -->
+{% if articles %}
+{% for article in articles %}
+<section id="articles" class="content-fluid content-section" style="background-color:{{species_detail.family.thematic_hexacolor}}">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 text-center">
+				{{article.content|safe}}
+			</div>
+		</div>
+	</div>
+</section>
+{% endfor %}
+{% endif %}
+
+<section class="content-fluid content-section">
+	<!-- Related Projects Row -->
+	<div class="container">
+		<div class="row">
+		    <div class="col-lg-12">
+		        <h3 class="page-header">Multimídia</h3>
+		    </div>
+		
+		    <div class="col-sm-3 col-xs-6">
+		        <a href="#">
+		            <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+		        </a>
+		    </div>
+		
+		    <div class="col-sm-3 col-xs-6">
+		        <a href="#">
+		            <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+		        </a>
+		    </div>
+		
+		    <div class="col-sm-3 col-xs-6">
+		        <a href="#">
+		            <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+		        </a>
+		    </div>
+		
+		    <div class="col-sm-3 col-xs-6">
+		        <a href="#">
+		            <img class="img-responsive portfolio-item" src="http://placehold.it/500x300" alt="">
+		        </a>
+		    </div>
+		</div>
+	</div>
+
+</section>
+{% endblock %}
+
+
+{% block customjsend %}
+<script>
+	window.onload=function(){
+	
+		var themeColor = $("div#subnav").css("background-color");
+	
+		// Distmap js 
+		var a = document.getElementById("distmap");
+		var svgDoc = a.contentDocument;
+		{% for state in occurrence_states %}
+			var svgItem = svgDoc.querySelector("#{{state.short}} path");
+			svgItem.setAttribute("class", "selected");
+			// gets thematic color from navbar background
+			svgItem.style.fill = themeColor;
+		{% endfor %}
+		
+			
+		// Occurrence months separator NOT BEING USED
+		var monthItems = $(".occurrence-months-ruler .month-item");
+		for (i=0; i < monthItems.length; i++){
+			thisItem = monthItems[i];
+			nextItem = monthItems[i+1];
+			if ( ($(thisItem).hasClass("selected") && $(nextItem).hasClass("selected")) || 
+			     (!$(thisItem).hasClass("selected") && !$(nextItem).hasClass("selected")) 
+			){	
+				$(thisItem).find("h5").addClass("sep-right");
+			}		
+		}
+		
+		$("i.fa-inverse").css("color", themeColor);
+		
+		
+		// Audio player controllers behavior
+		var player = document.getElementById('player');
+		$('#playpause').click( function(){
+			if(player.paused){
+				player.play();
+			}
+			else{
+				player.pause();
+			}
+			$(this).toggleClass('fa-pause');
+		}); 
+		$(player).on('ended', function(){
+			console.log("ended");
+			
+		});
+		
+		
+	}
+	
+</script>
+{% endblock %}
+

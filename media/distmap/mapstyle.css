@@ -1,0 +1,16 @@
+
+/*
+	Distribution map style
+*/
+
+
+svg path{
+	stroke:white;
+	stroke-width:6;
+	fill:#ccc;
+}
+svg path.selected{
+	fill:#888;
+	stroke-width:3;
+}
+

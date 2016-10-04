@@ -1,0 +1,27 @@
+{% extends "speciesguide/base.html" %}
+
+
+
+
+{% block content %}
+
+<section class="container-fluid content-section text-center">
+	<div class="row">
+		<h1>Famílias</h1>
+			{% for family in families %}
+			<p>{{ family }}</p>
+			{% endfor %}
+			
+		<h1>Anfíbios</h1>
+			{% for sp in species %}
+				<p>{{sp.vernacular}}</p>
+			{% endfor %}
+			
+		<h1>Habitats</h1>
+			{% for habitat in habitats %}
+				<p>{{ habitat }}</p>
+			{% endfor %}
+	</div>
+</section>	
+{% endblock %}
+
